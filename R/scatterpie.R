@@ -15,9 +15,15 @@
 ##' @return layer
 ##' @author guangchuang yu
 geom_scatterpie <- function(mapping, data, cols, scale_fun=function(x) x/sum(x), ...) {
-    data$size <- scale_fun(rowSums(data[, cols]))
-    df <- gather_(data, "type", "value", cols)
-    mapping <- modifyList(mapping, aes_(r0=0, r=~size, fill=~type,
+    mapping <- modifyList(mapping, aes_(r0=0, fill=~type,
                                         amount=~value))
+    if (!'r' %in% names(mapping)) {
+        data$size <- scale_fun(rowSums(data[, cols]))
+        mapping <- modifyList(mapping, aes_(r=~size))
+    }
+
+    names(mapping)[match(c("x", "y"), names(mapping))] <- c("x0", "y0")
+
+    df <- gather_(data, "type", "value", cols)
     geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...)
 }

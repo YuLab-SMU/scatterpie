@@ -46,7 +46,7 @@ head(d)
 
 
 ```{r fig.width=10}
-ggplot() + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
                            cols=LETTERS[1:4], scale_fun=function(x) 5) + coord_equal()
 ```
 
@@ -55,12 +55,21 @@ here use fixed number to plot all pie with equal size.
 
 
 ```{r fig.width=10}
-ggplot() + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
                            cols=LETTERS[1:4], scale_fun=function(x) 30* x/sum(x), color=NA) + coord_equal()
 ```
 
 The `x` in `scale_fun` is the total number of each observation, so
 here `x` is `rowSums(d[, LETTERS[1:4]]`.
+
+`scale_fun` can be omitted if user specifying `aes(r)` to map the
+radius to specific value of variable.
+
+```{r fig.width=10}
+d$radius <- 6
+ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region, r=radius), data=d,
+                           cols=LETTERS[1:4], color=NA) + coord_equal()
+```
 
 
 The `geom_scatterpie` is especially useful for visualizing data on a
@@ -71,7 +80,7 @@ world <- map_data('world')
 p <- ggplot(world, aes(long, lat)) +
     geom_map(map=world, aes(map_id=region), fill=NA, color="black") +
     coord_quickmap()
-p + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+p + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
                     cols=LETTERS[1:4], scale_fun=function(x) 5, color=NA, alpha=.8)
 ```
 
