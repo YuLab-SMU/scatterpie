@@ -1,0 +1,87 @@
+---
+title: "scatterpie: scatter pie plot"
+author: "Guangchuang Yu, The University of Hong Kong"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{seqcombo introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r style, echo=FALSE, results="asis", message=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+		   message = FALSE)
+```
+
+
+```{r echo=FALSE, results="hide", message=FALSE}
+library("ggplot2")
+library("scatterpie")
+```
+
+# Scatter Pie plot
+
+```{r}
+set.seed(123)
+long <- rnorm(50, sd=100)
+lat <- rnorm(50, sd=50)
+d <- data.frame(long=long, lat=lat)
+d <- with(d, d[abs(long) < 150 & abs(lat) < 70,])
+n <- nrow(d)
+d$region <- factor(1:n)
+d$A <- abs(rnorm(n, mean=5))
+d$B <- abs(rnorm(n, mean=5))
+d$C <- abs(rnorm(n, mean=5))
+d$D <- abs(rnorm(n, mean=5))
+d[1, 4:7] <- d[1, 4:7] * 3
+head(d)
+```
+
+
+```{r fig.width=10}
+ggplot() + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+                           cols=LETTERS[1:4], scale_fun=function(x) 5) + coord_equal()
+```
+
+`scale_fun` is user define function for pie size (radius) scaling,
+here use fixed number to plot all pie with equal size.
+
+
+```{r fig.width=10}
+ggplot() + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+                           cols=LETTERS[1:4], scale_fun=function(x) 30* x/sum(x), color=NA) + coord_equal()
+```
+
+The `x` in `scale_fun` is the total number of each observation, so
+here `x` is `rowSums(d[, LETTERS[1:4]]`.
+
+
+The `geom_scatterpie` is especially useful for visualizing data on a
+map.
+
+```{r fig.width=10}
+world <- map_data('world')
+p <- ggplot(world, aes(long, lat)) +
+    geom_map(map=world, aes(map_id=region), fill=NA, color="black") +
+    coord_quickmap()
+p + geom_scatterpie(aes(x0=long, y0=lat, group=region), data=d,
+                    cols=LETTERS[1:4], scale_fun=function(x) 5, color=NA, alpha=.8)
+```
+
+
+
+
+# Session info
+
+Here is the output of `sessionInfo()` on the system on which this document was compiled:
+```{r echo=FALSE}
+sessionInfo()
+```
+
