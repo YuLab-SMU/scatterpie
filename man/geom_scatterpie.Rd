@@ -4,7 +4,7 @@
 \alias{geom_scatterpie}
 \title{geom_scatterpie}
 \usage{
-geom_scatterpie(mapping, data, cols, scale_fun = function(x) x/sum(x), ...)
+geom_scatterpie(mapping, data, cols, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -12,8 +12,6 @@ geom_scatterpie(mapping, data, cols, scale_fun = function(x) x/sum(x), ...)
 \item{data}{data}
 
 \item{cols}{cols the pie data}
-
-\item{scale_fun}{scale function for pie size}
 
 \item{...}{additional parameters}
 }

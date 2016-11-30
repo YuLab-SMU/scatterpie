@@ -24,6 +24,7 @@ knitr::opts_chunk$set(tidy = FALSE,
 ```{r echo=FALSE, results="hide", message=FALSE}
 library("ggplot2")
 library("scatterpie")
+theme_set(theme_minimal())
 ```
 
 # Scatter Pie plot
@@ -47,28 +48,14 @@ head(d)
 
 ```{r fig.width=10}
 ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
-                           cols=LETTERS[1:4], scale_fun=function(x) 5) + coord_equal()
+                           cols=LETTERS[1:4]) + coord_equal()
 ```
-
-`scale_fun` is user define function for pie size (radius) scaling,
-here use fixed number to plot all pie with equal size.
-
-
-```{r fig.width=10}
-ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
-                           cols=LETTERS[1:4], scale_fun=function(x) 30* x/sum(x), color=NA) + coord_equal()
-```
-
-The `x` in `scale_fun` is the total number of each observation, so
-here `x` is `rowSums(d[, LETTERS[1:4]]`.
-
-`scale_fun` can be omitted if user specifying `aes(r)` to map the
-radius to specific value of variable.
 
 ```{r fig.width=10}
 d$radius <- 6 * abs(rnorm(n))
-ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region, r=radius), data=d,
-                           cols=LETTERS[1:4], color=NA) + coord_equal()
+p <- ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region, r=radius), data=d,
+                                cols=LETTERS[1:4], color=NA) + coord_equal()
+p + geom_scatterpie_legend(d$radius, x=-140, y=-70)
 ```
 
 
@@ -80,10 +67,11 @@ world <- map_data('world')
 p <- ggplot(world, aes(long, lat)) +
     geom_map(map=world, aes(map_id=region), fill=NA, color="black") +
     coord_quickmap()
-p + geom_scatterpie(aes(x=long, y=lat, group=region), data=d,
-                    cols=LETTERS[1:4], scale_fun=function(x) 5, color=NA, alpha=.8)
-```
-
+p + geom_scatterpie(aes(x=long, y=lat, group=region, r=radius),
+                    data=d, cols=LETTERS[1:4], color=NA, alpha=.8) +
+    geom_scatterpie_legend(d$radius, x=-160, y=-55)
+```	
+	
 
 
 
