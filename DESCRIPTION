@@ -14,7 +14,8 @@ Imports:
     utils
 Suggests:
     knitr,
-    prettydoc
+    prettydoc,
+    maps
 VignetteBuilder: knitr
 License: Artistic-2.0
 Encoding: UTF-8

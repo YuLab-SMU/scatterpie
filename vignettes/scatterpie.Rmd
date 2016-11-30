@@ -36,10 +36,10 @@ d <- data.frame(long=long, lat=lat)
 d <- with(d, d[abs(long) < 150 & abs(lat) < 70,])
 n <- nrow(d)
 d$region <- factor(1:n)
-d$A <- abs(rnorm(n, mean=5))
-d$B <- abs(rnorm(n, mean=5))
-d$C <- abs(rnorm(n, mean=5))
-d$D <- abs(rnorm(n, mean=5))
+d$A <- abs(rnorm(n, sd=1))
+d$B <- abs(rnorm(n, sd=2))
+d$C <- abs(rnorm(n, sd=3))
+d$D <- abs(rnorm(n, sd=4))
 d[1, 4:7] <- d[1, 4:7] * 3
 head(d)
 ```
@@ -66,7 +66,7 @@ here `x` is `rowSums(d[, LETTERS[1:4]]`.
 radius to specific value of variable.
 
 ```{r fig.width=10}
-d$radius <- 6
+d$radius <- 6 * abs(rnorm(n))
 ggplot() + geom_scatterpie(aes(x=long, y=lat, group=region, r=radius), data=d,
                            cols=LETTERS[1:4], color=NA) + coord_equal()
 ```
