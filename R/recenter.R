@@ -5,11 +5,10 @@
 ##' @param mapdata map data, shoud be a data.frame
 ##' @param center center
 ##' @param longitude_column longitude column
-##' @param clean whether clean data to prevent cross lines
 ##' @return updated map data
 ##' @export
 ##' @author ygc
-recenter <- function(mapdata, center, longitude_column='long', clean=FALSE) {
+recenter <- function(mapdata, center, longitude_column='long') {
     if (center <= 0) {
         stop("center should be positive value...")
     }

@@ -4,7 +4,7 @@
 \alias{recenter}
 \title{recenter}
 \usage{
-recenter(mapdata, center, longitude_column = "long", clean = FALSE)
+recenter(mapdata, center, longitude_column = "long")
 }
 \arguments{
 \item{mapdata}{map data, shoud be a data.frame}
@@ -12,8 +12,6 @@ recenter(mapdata, center, longitude_column = "long", clean = FALSE)
 \item{center}{center}
 
 \item{longitude_column}{longitude column}
-
-\item{clean}{whether clean data to prevent cross lines}
 }
 \value{
 updated map data
