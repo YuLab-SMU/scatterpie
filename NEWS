@@ -1,0 +1,11 @@
+CHANGES IN VERSION 0.0.3
+------------------------
+ o recenter to set the center of map data <2016-12-01, Thu>
+
+CHANGES IN VERSION 0.0.2
+------------------------
+ o geom_scatterpie_legend <2016-12-01, Thu>
+
+CHANGES IN VERSION 0.0.1
+------------------------
+ o geom_scatterpie <2016-11-30, Wed>
