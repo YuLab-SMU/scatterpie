@@ -4,7 +4,7 @@
 \alias{geom_scatterpie}
 \title{geom_scatterpie}
 \usage{
-geom_scatterpie(mapping, data, cols, ...)
+geom_scatterpie(mapping = NULL, data, cols, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -20,6 +20,14 @@ layer
 }
 \description{
 scatter pie plot
+}
+\examples{
+library(ggplot2)
+d <- data.frame(x=rnorm(5), y=rnorm(5))
+d$A <- abs(rnorm(5, sd=1))
+d$B <- abs(rnorm(5, sd=2))
+d$C <- abs(rnorm(5, sd=3))
+ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
 }
 \author{
 guangchuang yu
