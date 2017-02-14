@@ -23,11 +23,11 @@ install:
 
 check: build
 	cd ..;\
-	Rscript -e 'rcmdcheck::rcmdcheck("$(PKGNAME)_$(PKGVERS).tar.gz")'
+	Rscript -e 'rcmdcheck::rcmdcheck("$(PKGNAME)_$(PKGVERS).tar.gz", args="--as-cran")'
 
 check2: build
 	cd ..;\
-	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz
+	R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
 
 clean:
 	cd ..;\

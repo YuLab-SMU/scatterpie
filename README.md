@@ -1,7 +1,7 @@
 scatterpie: Scatterpie Plot
 ---------
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](http://cran.r-project.org/package=scatterpie)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green)
 ![](http://cranlogs.r-pkg.org/badges/scatterpie?color=green)
 ![](http://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
