@@ -35,6 +35,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, ...) {
     names(mapping)[match(c("x", "y"), names(mapping))] <- c("x0", "y0")
 
     df <- gather_(data, "type", "value", cols)
+    ## df$type <- factor(df$type, levels=cols)
     geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...)
 }
 

@@ -22,10 +22,10 @@ geom_scatterpie_legend <- function(radius, x, y, n=5) {
     ## }
 
     if (length(radius) > n) {
-        radius <- sapply(seq(min(radius), max(radius), length.out=n), round_digit)
+        radius <- unique(sapply(seq(min(radius), max(radius), length.out=n), round_digit))
     }
 
-    dd <- data.frame(r=radius, start=0, end=2*pi, x=x, y=y-rev(radius), maxr=max(radius))
+    dd <- data.frame(r=radius, start=0, end=2*pi, x=x, y=y + radius - max(radius), maxr=max(radius))
 
     list(
         geom_arc_bar(aes_(x0=~x, y0=~y, r0=~r, r=~r, start=~start, end=~end), data=dd, inherit.aes=FALSE),
