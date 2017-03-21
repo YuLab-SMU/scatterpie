@@ -4,7 +4,7 @@
 \alias{geom_scatterpie_legend}
 \title{geom_scatterpie_legend}
 \usage{
-geom_scatterpie_legend(radius, x, y, n = 5)
+geom_scatterpie_legend(radius, x, y, n = 5, labeller)
 }
 \arguments{
 \item{radius}{radius vector}
@@ -14,6 +14,8 @@ geom_scatterpie_legend(radius, x, y, n = 5)
 \item{y}{y position}
 
 \item{n}{number of circle}
+
+\item{labeller}{function to label radius}
 }
 \value{
 layer

@@ -1,8 +1,12 @@
+CHANGES IN VERSION 0.0.7
+------------------------
+ o add labeller parameter in geom_scatterpie_legend <2017-03-21, Tue>
+
 CHANGES IN VERSION 0.0.6
 ------------------------
  o bug fixed of geom_scatterpie_legend <2016-02-14, Tue>
    + https://github.com/GuangchuangYu/scatterpie/issues/3
- 
+
 CHANGES IN VERSION 0.0.5
 ------------------------
  o add examples in geom_scatterpie <2016-12-02, Fri>
