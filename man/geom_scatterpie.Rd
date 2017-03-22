@@ -32,3 +32,4 @@ ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord
 \author{
 guangchuang yu
 }
+
