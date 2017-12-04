@@ -4,7 +4,7 @@
 \alias{geom_scatterpie}
 \title{geom_scatterpie}
 \usage{
-geom_scatterpie(mapping = NULL, data, cols, ...)
+geom_scatterpie(mapping = NULL, data, cols, sorted_by_radius = FALSE, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -12,6 +12,8 @@ geom_scatterpie(mapping = NULL, data, cols, ...)
 \item{data}{data}
 
 \item{cols}{cols the pie data}
+
+\item{sorted_by_radius}{whether plotting large pie first}
 
 \item{...}{additional parameters}
 }
@@ -32,4 +34,3 @@ ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord
 \author{
 guangchuang yu
 }
-

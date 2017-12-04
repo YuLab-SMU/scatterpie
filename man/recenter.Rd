@@ -22,4 +22,3 @@ re-center map data
 \author{
 ygc
 }
-
