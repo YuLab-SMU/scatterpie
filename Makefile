@@ -7,6 +7,8 @@ all: rd check clean
 rd:
 	Rscript -e 'roxygen2::roxygenise(".")'
 
+readme:
+	Rscript -e 'rmarkdown::render("README.Rmd")'
 
 vignette:
 	cd vignettes;\

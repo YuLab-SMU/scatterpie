@@ -35,6 +35,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
     }
 
     names(mapping)[match(c("x", "y"), names(mapping))] <- c("x0", "y0")
+    data <- data[rowSums(data[, cols]) > 0, ]
 
     df <- gather_(data, "type", "value", cols)
 
