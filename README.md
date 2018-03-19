@@ -34,4 +34,4 @@ devtools::install_github("GuangchuangYu/scatterpie")
 Vignette
 --------
 
-For more details, please refer to the [online vignette](https://cran.r-project.org/web/packages/scatterpie/vignettes/scatterpie.html).
+For more details, please refer to the \[online vignette\]((<https://cran.r-project.org/package=scatterpie/vignettes/scatterpie.html>).
