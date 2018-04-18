@@ -2,7 +2,7 @@
 scatterpie: Scatterpie Plot
 ---------------------------
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie) ![](http://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green) ![](http://cranlogs.r-pkg.org/badges/scatterpie?color=green) ![](http://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green) [![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics) [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/GuangchuangYu)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie) [![](https://img.shields.io/badge/devel%20version-0.1.1-green.svg)](https://github.com/guangchuangyu/scatterpie) ![](http://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green) ![](http://cranlogs.r-pkg.org/badges/scatterpie?color=green) ![](http://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
 
 Creates scatterpie plots, especially useful for plotting pies on a map.
 
@@ -13,7 +13,7 @@ Guangchuang YU <https://guangchuangyu.github.io>
 
 School of Public Health, The University of Hong Kong
 
-[![](https://img.shields.io/badge/follow%20me%20on-微信-green.svg?style=flat)](https://guangchuangyu.github.io/blog_images/biobabble.jpg) [![](https://img.shields.io/badge/打赏-支付宝/微信-green.svg?style=flat)](https://guangchuangyu.github.io/blog_images/pay_qrcode.png)
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu) [![](https://img.shields.io/badge/follow%20me%20on-微信-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg) [![](https://img.shields.io/badge/打赏-支付宝/微信-green.svg)](https://guangchuangyu.github.io/blog_images/pay_qrcode.png)
 
 Installation
 ------------

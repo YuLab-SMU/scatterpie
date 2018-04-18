@@ -8,15 +8,19 @@ html_preview: false
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
+```{r echo=FALSE, results="hide", message=FALSE}
+library("badger")
+```
+
 scatterpie: Scatterpie Plot
 ---------
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie)
+`r badge_devel("guangchuangyu/scatterpie", "green")`
 ![](http://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green)
 ![](http://cranlogs.r-pkg.org/badges/scatterpie?color=green)
 ![](http://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
-[![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics)
-[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/GuangchuangYu)
+
 
 Creates scatterpie plots, especially useful for plotting pies on a map.
 
@@ -28,6 +32,7 @@ Guangchuang YU <https://guangchuangyu.github.io>
 
 School of Public Health, The University of Hong Kong
 
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
 `r badger::badge_custom("follow me on", "微信", "green", "https://guangchuangyu.github.io/blog_images/biobabble.jpg")`
 `r badger::badge_custom("打赏", "支付宝/微信", "green", "https://guangchuangyu.github.io/blog_images/pay_qrcode.png")`
 
