@@ -9,7 +9,9 @@
 ##' @param ... additional parameters
 ##' @importFrom ggforce geom_arc_bar
 ##' @importFrom utils modifyList
-##' @importFrom tidyr gather_
+##' @importFrom tidyr gather
+##' @importFrom rlang enquo
+##' @importFrom rlang !!
 ##' @importFrom ggplot2 aes_
 ##' @export
 ##' @return layer
@@ -28,7 +30,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
                                         amount=~value))
 
     if (!'r' %in% names(mapping)) {
-        xvar <- as.character(mapping)["x"]
+        xvar <- as.character(mapping$x)
         size <- diff(range(data[, xvar]))/50
         data$r <- size
         mapping <- modifyList(mapping, aes_(r=size))
@@ -37,7 +39,9 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
     names(mapping)[match(c("x", "y"), names(mapping))] <- c("x0", "y0")
     data <- data[rowSums(data[, cols]) > 0, ]
 
-    df <- gather_(data, "type", "value", cols)
+    ## df <- gather_(data, "type", "value", cols)
+    cols2 <- enquo(cols)
+    df <- gather(data, "type", "value", !!cols2)
 
     ## df$type <- factor(df$type, levels=cols)
     if (!sorted_by_radius) {

@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.1.0
+------------------------
+ o import rlang and use tidyeval with tidyr::gather <2018-04-18, Wed>
+   + https://github.com/GuangchuangYu/scatterpie/issues/9
+
 CHANGES IN VERSION 0.0.7
 ------------------------
  o add parameter `sorted_by_radius`.
