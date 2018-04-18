@@ -1,5 +1,6 @@
-CHANGES IN VERSION 0.1.0
+CHANGES IN VERSION 0.1.1
 ------------------------
+ o compatible with ggplot2 v=2.2.1.9000
  o import rlang and use tidyeval with tidyr::gather <2018-04-18, Wed>
    + https://github.com/GuangchuangYu/scatterpie/issues/9
 

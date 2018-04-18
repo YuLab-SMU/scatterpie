@@ -30,7 +30,12 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
                                         amount=~value))
 
     if (!'r' %in% names(mapping)) {
-        xvar <- as.character(mapping$x)
+        xvar <- as.character(mapping)['x']
+        if (is.na(xvar)) {
+            ## https://github.com/GuangchuangYu/scatterpie/issues/9#issuecomment-382299046
+            xvar <- as.character(mapping$x)[2]
+        }
+
         size <- diff(range(data[, xvar]))/50
         data$r <- size
         mapping <- modifyList(mapping, aes_(r=size))
