@@ -13,6 +13,7 @@
 ##' @importFrom rlang enquo
 ##' @importFrom rlang !!
 ##' @importFrom ggplot2 aes_
+##' @importFrom rvcheck get_aes_var
 ##' @export
 ##' @return layer
 ##' @examples
@@ -30,12 +31,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
                                         amount=~value))
 
     if (!'r' %in% names(mapping)) {
-        xvar <- as.character(mapping)['x']
-        if (is.na(xvar)) {
-            ## https://github.com/GuangchuangYu/scatterpie/issues/9#issuecomment-382299046
-            xvar <- as.character(mapping$x)[2]
-        }
-
+        xvar <- get_aes_var(mapping, "x")
         size <- diff(range(data[, xvar]))/50
         data$r <- size
         mapping <- modifyList(mapping, aes_(r=size))
