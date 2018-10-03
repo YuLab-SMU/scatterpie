@@ -24,10 +24,10 @@
 ##' d$C <- abs(rnorm(5, sd=3))
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
 ##' @author guangchuang yu
-geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, ...) {
+geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, legend_name = "type", ...) {
     if (is.null(mapping))
         mapping <- aes_(x=~x, y=~y)
-    mapping <- modifyList(mapping, aes_(r0=0, fill=~type,
+    mapping <- modifyList(mapping, aes_(r0=0, fill= as.formula(paste0("~", legend_name)),
                                         amount=~value))
 
     if (!'r' %in% names(mapping)) {
@@ -43,6 +43,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
     ## df <- gather_(data, "type", "value", cols)
     cols2 <- enquo(cols)
     df <- gather(data, "type", "value", !!cols2)
+    names(df)[which(names(df) == "type")] = legend_name
 
     ## df$type <- factor(df$type, levels=cols)
     if (!sorted_by_radius) {
