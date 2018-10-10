@@ -6,6 +6,7 @@
 ##' @param data data
 ##' @param cols cols the pie data
 ##' @param sorted_by_radius whether plotting large pie first
+##' @param legend_name name of fill legend
 ##' @param ... additional parameters
 ##' @importFrom ggforce geom_arc_bar
 ##' @importFrom utils modifyList
@@ -14,6 +15,7 @@
 ##' @importFrom rlang !!
 ##' @importFrom ggplot2 aes_
 ##' @importFrom rvcheck get_aes_var
+##' @importFrom stats as.formula
 ##' @export
 ##' @return layer
 ##' @examples

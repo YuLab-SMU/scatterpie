@@ -1,7 +1,7 @@
 ---
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
 html_preview: false
 ---
 
@@ -17,9 +17,9 @@ scatterpie: Scatterpie Plot
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie)
 `r badge_devel("guangchuangyu/scatterpie", "green")`
-![](http://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green)
-![](http://cranlogs.r-pkg.org/badges/scatterpie?color=green)
-![](http://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
+![](https://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green)
+![](https://cranlogs.r-pkg.org/badges/scatterpie?color=green)
+![](https://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
 
 
 Creates scatterpie plots, especially useful for plotting pies on a map.
