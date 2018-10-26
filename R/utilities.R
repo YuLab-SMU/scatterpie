@@ -1,12 +1,12 @@
 
 round_digit <- function (d) {
-    i <- 0
-    while (d < 1) {
-        d <- d * 10
-        i <- i + 1
+    if (d > 1) {
+        round(d)
+    } else {
+        round(d, -as.integer(floor(log10(abs(d)))))
     }
-    round(d)/10^i
 }
+
 
 
 is_fixed_radius <- function(rvar) {
