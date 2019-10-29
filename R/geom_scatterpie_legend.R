@@ -7,13 +7,14 @@
 ##' @param y y position
 ##' @param n number of circle
 ##' @param labeller function to label radius
+##' @param size whether to use the actual size as the radius
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggplot2 geom_segment
 ##' @importFrom ggplot2 geom_text
 ##' @export
 ##' @return layer
 ##' @author Guangchuang Yu
-geom_scatterpie_legend <- function(radius, x, y, n=5, labeller) {
+geom_scatterpie_legend <- function(radius, x, y, n=5, labeller, size = TRUE) {
     ## rvar <- as.character(mapping)["r"]
     ## if (is_fixed_radius(rvar)) {
     ##     radius <- as.numeric(rvar)
@@ -35,12 +36,22 @@ geom_scatterpie_legend <- function(radius, x, y, n=5, labeller) {
     }
 
     dd <- data.frame(r=radius, start=0, end=2*pi, x=x, y=y + radius - max(radius), maxr=max(radius))
+    if(size == TRUE){
+        if(label) {
+            dd$label <- labeller(dd$r)
+        } else {
+            dd$label <- dd$r
+        }} else {
+		
+		
+		     if(label) {
+                dd$label <- labeller((dd$r)^2*sum(dd$r))
+                } else {
+                    dd$label <- (dd$r)^2*sum(dd$r)
+                }
+		    }
 
-    if(label) {
-        dd$label <- labeller(dd$r)
-    } else {
-        dd$label <- dd$r
-    }
+
 
     list(
         geom_arc_bar(aes_(x0=~x, y0=~y, r0=~r, r=~r, start=~start, end=~end), data=dd, inherit.aes=FALSE),
