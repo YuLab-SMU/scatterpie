@@ -3,7 +3,7 @@
 ## scatterpie: Scatterpie Plot
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/scatterpie?color=green)](https://cran.r-project.org/package=scatterpie)
-[![](https://img.shields.io/badge/devel%20version-0.1.3-green.svg)](https://github.com/guangchuangyu/scatterpie)
+[![](https://img.shields.io/badge/devel%20version-0.1.4-green.svg)](https://github.com/guangchuangyu/scatterpie)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/scatterpie?color=green)
 ![](https://cranlogs.r-pkg.org/badges/scatterpie?color=green)
 ![](https://cranlogs.r-pkg.org/badges/last-week/scatterpie?color=green)
@@ -36,5 +36,5 @@ devtools::install_github("GuangchuangYu/scatterpie")
 
 ## :book: Vignette
 
-For more details, please refer to the \[online
-vignette\]((<https://cran.r-project.org/package=scatterpie/vignettes/scatterpie.html>).
+For more details, please refer to the [online
+vignette](https://cran.r-project.org/package=scatterpie/vignettes/scatterpie.html).
