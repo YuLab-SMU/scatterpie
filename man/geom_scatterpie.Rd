@@ -4,8 +4,8 @@
 \alias{geom_scatterpie}
 \title{geom_scatterpie}
 \usage{
-geom_scatterpie(mapping = NULL, data, cols, sorted_by_radius = FALSE,
-  legend_name = "type", ...)
+geom_scatterpie(mapping = NULL, data, cols, pie_scale = 1,
+  sorted_by_radius = FALSE, legend_name = "type", ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -13,6 +13,8 @@ geom_scatterpie(mapping = NULL, data, cols, sorted_by_radius = FALSE,
 \item{data}{data}
 
 \item{cols}{cols the pie data}
+
+\item{pie_scale}{amount to scale the pie size if there is no radius mapping exists}
 
 \item{sorted_by_radius}{whether plotting large pie first}
 

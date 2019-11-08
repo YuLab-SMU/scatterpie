@@ -10,17 +10,16 @@
 
 Creates scatterpie plots, especially useful for plotting pies on a map.
 
-## Authors
+## :writing\_hand: Authors
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
 School of Basic Medical Sciences, Southern Medical University
 
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
-[![](https://img.shields.io/badge/follow%20me%20on-微信-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
-[![](https://img.shields.io/badge/打赏-支付宝/微信-green.svg)](https://guangchuangyu.github.io/blog_images/pay_qrcode.png)
+[![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
 
-## Installation
+## :arrow\_double\_down: Installation
 
 Get the released version from CRAN:
 
@@ -35,7 +34,7 @@ Or the development version from github:
 devtools::install_github("GuangchuangYu/scatterpie")
 ```
 
-## Vignette
+## :book: Vignette
 
 For more details, please refer to the \[online
 vignette\]((<https://cran.r-project.org/package=scatterpie/vignettes/scatterpie.html>).

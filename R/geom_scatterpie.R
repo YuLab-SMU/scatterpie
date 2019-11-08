@@ -5,6 +5,7 @@
 ##' @param mapping aes mapping
 ##' @param data data
 ##' @param cols cols the pie data
+##' @param pie_scale amount to scale the pie size if there is no radius mapping exists
 ##' @param sorted_by_radius whether plotting large pie first
 ##' @param legend_name name of fill legend
 ##' @param ... additional parameters
@@ -26,15 +27,18 @@
 ##' d$C <- abs(rnorm(5, sd=3))
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
 ##' @author guangchuang yu
-geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, legend_name = "type", ...) {
+geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_radius = FALSE, legend_name = "type", ...) {
     if (is.null(mapping))
-        mapping <- aes_(x=~x, y=~y)
-    mapping <- modifyList(mapping, aes_(r0=0, fill= as.formula(paste0("~", legend_name)),
-                                        amount=~value))
+        mapping <- aes_(x = ~x, y = ~y)
+    mapping <- modifyList(mapping,
+                          aes_(r0 = 0,
+                               fill = as.formula(paste0("~", legend_name)),
+                               amount=~value)
+                          )
 
     if (!'r' %in% names(mapping)) {
         xvar <- get_aes_var(mapping, "x")
-        size <- diff(range(data[, xvar]))/50
+        size <- diff(range(data[, xvar]))/ 50 * pie_scale
         data$r <- size
         mapping <- modifyList(mapping, aes_(r=size))
     }
@@ -45,7 +49,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, sorted_by_radius = FALSE, 
     ## df <- gather_(data, "type", "value", cols)
     cols2 <- enquo(cols)
     df <- gather(data, "type", "value", !!cols2)
-    names(df)[which(names(df) == "type")] = legend_name
+    names(df)[which(names(df) == "type")] <- legend_name
 
     ## df$type <- factor(df$type, levels=cols)
     if (!sorted_by_radius) {
