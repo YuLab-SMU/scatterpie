@@ -1,3 +1,11 @@
+CHANGES IN VERSION 0.1.4
+------------------------
+ o pie_scale parameter in geom_scatterpie <2019-11-08, Fri>
+
+CHANGES IN VERSION 0.1.3
+------------------------
+ o fixed bug of round_digit
+
 CHANGES IN VERSION 0.1.2
 ------------------------
  o import rvcheck::get_aes_var to compatible with ggplot2 v < 2.3.0 and >= 2.3.0 <2018-05-23, Wed>
