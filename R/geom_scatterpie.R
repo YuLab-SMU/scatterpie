@@ -55,6 +55,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_r
       ## df <- gather_(data, "type", "value", cols)
       cols2 <- enquo(cols)
       df <- gather(data, "type", "value", !!cols2)
+      df$type <- factor(df$type, levels = cols) # set legend order based on order of "cols"      
       names(df)[which(names(df) == "type")] = legend_name
     }
     ## df <- gather_(data, "type", "value", cols)
