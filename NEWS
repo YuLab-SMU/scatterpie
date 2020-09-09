@@ -1,3 +1,10 @@
+CHANGES IN VERSION 0.1.5
+------------------------
+ o set legend order based on order of "cols" <2020-09-09, Wed>
+   + https://github.com/GuangchuangYu/scatterpie/pull/28
+ o Add in long format option to geom_scatterpie
+   + https://github.com/GuangchuangYu/scatterpie/pull/22
+
 CHANGES IN VERSION 0.1.4
 ------------------------
  o pie_scale parameter in geom_scatterpie <2019-11-08, Fri>

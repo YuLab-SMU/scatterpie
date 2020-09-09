@@ -8,6 +8,7 @@
 ##' @param pie_scale amount to scale the pie size if there is no radius mapping exists
 ##' @param sorted_by_radius whether plotting large pie first
 ##' @param legend_name name of fill legend
+##' @param long_format whether use long format of input data
 ##' @param ... additional parameters
 ##' @importFrom ggforce geom_arc_bar
 ##' @importFrom utils modifyList
@@ -26,7 +27,7 @@
 ##' d$B <- abs(rnorm(5, sd=2))
 ##' d$C <- abs(rnorm(5, sd=3))
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
-##' d <- dplyr::gather(d, key="letters", value="value", -x:-y)
+##' d <- tidyr::gather(d, key="letters", value="value", -x:-y)
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
 ##' @author Guangchuang Yu
 geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_radius = FALSE, legend_name = "type", long_format=FALSE, ...) {

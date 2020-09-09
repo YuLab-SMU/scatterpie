@@ -4,8 +4,16 @@
 \alias{geom_scatterpie}
 \title{geom_scatterpie}
 \usage{
-geom_scatterpie(mapping = NULL, data, cols, pie_scale = 1,
-  sorted_by_radius = FALSE, legend_name = "type", ...)
+geom_scatterpie(
+  mapping = NULL,
+  data,
+  cols,
+  pie_scale = 1,
+  sorted_by_radius = FALSE,
+  legend_name = "type",
+  long_format = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -19,6 +27,8 @@ geom_scatterpie(mapping = NULL, data, cols, pie_scale = 1,
 \item{sorted_by_radius}{whether plotting large pie first}
 
 \item{legend_name}{name of fill legend}
+
+\item{long_format}{whether use long format of input data}
 
 \item{...}{additional parameters}
 }
@@ -35,7 +45,9 @@ d$A <- abs(rnorm(5, sd=1))
 d$B <- abs(rnorm(5, sd=2))
 d$C <- abs(rnorm(5, sd=3))
 ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
+d <- tidyr::gather(d, key="letters", value="value", -x:-y)
+ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
 }
 \author{
-guangchuang yu
+Guangchuang Yu
 }
