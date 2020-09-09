@@ -26,8 +26,10 @@
 ##' d$B <- abs(rnorm(5, sd=2))
 ##' d$C <- abs(rnorm(5, sd=3))
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
-##' @author guangchuang yu
-geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_radius = FALSE, legend_name = "type", ...) {
+##' d <- dplyr::gather(d, key="letters", value="value", -x:-y)
+##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
+##' @author Guangchuang Yu
+geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_radius = FALSE, legend_name = "type", long_format=FALSE, ...) {
     if (is.null(mapping))
         mapping <- aes_(x = ~x, y = ~y)
     mapping <- modifyList(mapping,
@@ -44,13 +46,22 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_r
     }
 
     names(mapping)[match(c("x", "y"), names(mapping))] <- c("x0", "y0")
-    data <- data[rowSums(data[, cols]) > 0, ]
-
+    if(long_format==TRUE){
+      df <- data
+      names(df)[which(names(df) == cols)] = legend_name
+      cols2 <- enquo(cols)
+    } else{
+      data <- data[rowSums(data[, cols]) > 0, ]
+      ## df <- gather_(data, "type", "value", cols)
+      cols2 <- enquo(cols)
+      df <- gather(data, "type", "value", !!cols2)
+      df$type <- factor(df$type, levels = cols) # set legend order based on order of "cols"      
+      names(df)[which(names(df) == "type")] = legend_name
+    }
     ## df <- gather_(data, "type", "value", cols)
-    cols2 <- enquo(cols)
-    df <- gather(data, "type", "value", !!cols2)
-    df$type <- factor(df$type, levels = cols) # set legend order based on order of "cols"
-    names(df)[which(names(df) == "type")] <- legend_name
+    # cols2 <- enquo(cols)
+    # df <- gather(data, "type", "value", !!cols2)
+    # names(df)[which(names(df) == "type")] = legend_name
 
     ## df$type <- factor(df$type, levels=cols)
     if (!sorted_by_radius) {
