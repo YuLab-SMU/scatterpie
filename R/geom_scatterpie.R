@@ -16,7 +16,7 @@
 ##' @importFrom rlang enquo
 ##' @importFrom rlang !!
 ##' @importFrom ggplot2 aes_
-##' @importFrom rvcheck get_aes_var
+##' @importFrom ggfun get_aes_var
 ##' @importFrom stats as.formula
 ##' @export
 ##' @return layer
