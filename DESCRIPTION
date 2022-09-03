@@ -1,6 +1,6 @@
 Package: scatterpie
 Title: Scatter Pie Plot
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6485-8781"))
 Description: Creates scatterpie plots, especially useful for plotting pies on a map.
 Depends:
