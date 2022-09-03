@@ -22,9 +22,14 @@ geom_scatterpie_legend <- function(radius, x, y, n=5, labeller) {
     ##     radius <- sapply(seq(min(rr), max(rr), length.out=5), roundDigit)
     ## }
 
-    if (length(radius) > n) {
-        radius <- unique(sapply(seq(min(radius), max(radius), length.out=n), round_digit))
+    #if (length(radius) > n) {
+    #    radius <- unique(sapply(seq(min(radius), max(radius), length.out=n), round_digit))
+    #}
+    if (n <= 1){
+        stop('The n argument requires larger than 1.')
     }
+
+    radius <- scales::breaks_extended(n = n)(radius)
 
     label <- FALSE
     if (!missing(labeller)) {
