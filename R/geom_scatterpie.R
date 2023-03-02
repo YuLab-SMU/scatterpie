@@ -18,6 +18,7 @@
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggfun get_aes_var
 ##' @importFrom stats as.formula
+##' @importFrom dplyr bind_rows group_by group_split
 ##' @export
 ##' @return layer
 ##' @examples
@@ -65,6 +66,16 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_r
     # names(df)[which(names(df) == "type")] = legend_name
 
     ## df$type <- factor(df$type, levels=cols)
+    if (!"group" %in% names(mapping)){
+      xvar <- get_aes_var(mapping, 'x0')
+      yvar <- get_aes_var(mapping, 'y0')
+      df <- df |> dplyr::group_by(!!xvar, !!yvar) |>
+       dplyr::group_split() |> as.list()
+      names(df) <- seq_len(length(df))
+      df <- dplyr::bind_rows(df, .id=".group.id")
+      mapping <- modifyList(mapping, aes_(group = ~.group.id))
+    }
+
     if (!sorted_by_radius) {
         return(geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...))
     }
