@@ -1,3 +1,7 @@
+# scatterpie 0.1.8.001
+
++ fixed the overlap issue with group mapping (2023-03-02, Thu, #37)
+
 # scatterpie 0.1.8
 
 + improve the legend of pie radius (2022-09-03, Sat, #35)
