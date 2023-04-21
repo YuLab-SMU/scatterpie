@@ -4,7 +4,15 @@
 \alias{geom_scatterpie_legend}
 \title{geom_scatterpie_legend}
 \usage{
-geom_scatterpie_legend(radius, x, y, n = 5, labeller)
+geom_scatterpie_legend(
+  radius,
+  x,
+  y,
+  n = 5,
+  labeller,
+  label_position = "right",
+  ...
+)
 }
 \arguments{
 \item{radius}{radius vector}
@@ -16,6 +24,11 @@ geom_scatterpie_legend(radius, x, y, n = 5, labeller)
 \item{n}{number of circle}
 
 \item{labeller}{function to label radius}
+
+\item{label_position}{a character string indicating the position of labels,
+"right" (default) or "left" or any abbreviation of these}
+
+\item{...}{other text arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}}
 }
 \value{
 layer
