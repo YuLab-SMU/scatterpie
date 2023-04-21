@@ -1,5 +1,6 @@
-# scatterpie 0.1.8.001
+# scatterpie 0.1.9
 
++ allow label customization in scatterpie legend (2023-04-22, Sat, #38)
 + fixed the overlap issue with group mapping (2023-03-02, Thu, #37)
 
 # scatterpie 0.1.8
