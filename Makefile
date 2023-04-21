@@ -16,9 +16,10 @@ vignette:
 	mv scatterpie.html ../docs/index.html
 
 build:
-	cd ..;\
-	R CMD build $(PKGSRC)
-
+	# cd ..;\
+	# R CMD build $(PKGSRC)
+	Rscript -e 'devtools::build()'
+	
 install:
 	cd ..;\
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
