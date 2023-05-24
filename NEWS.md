@@ -1,4 +1,4 @@
-# scatterpie 0.1.9.001
+# scatterpie 0.2.0
 
 + increase R version of dependency to 4.1.0 as we used native pipe (2023-04-26, Wed)
 
