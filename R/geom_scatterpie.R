@@ -80,7 +80,13 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, sorted_by_r
         return(geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...))
     }
 
-    lapply(split(df, df$r)[as.character(sort(unique(df$r), decreasing=TRUE))], function(d) {
+    if ('r' %in% colnames(df)){
+        rvar <- 'r'
+    }else{
+        rvar <- get_aes_var(mapping, 'r')
+    }
+    
+    lapply(split(df, df[,rvar, drop=TRUE])[as.character(sort(unique(df[,rvar, drop=TRUE]), decreasing=TRUE))], function(d) {
         geom_arc_bar(mapping, data=d, stat='pie', inherit.aes=FALSE, ...)
     })
 }
