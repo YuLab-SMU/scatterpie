@@ -6,6 +6,7 @@
 ##' @param x x position
 ##' @param y y position
 ##' @param n number of circle
+##' @param breaks A character vector of breaks, default is NULL.
 ##' @param labeller function to label radius
 ##' @param label_position a character string indicating the position of labels,
 ##'   "right" (default) or "left" or any abbreviation of these
@@ -16,7 +17,7 @@
 ##' @export
 ##' @return layer
 ##' @author Guangchuang Yu
-geom_scatterpie_legend <- function(radius, x, y, n=5, labeller, label_position = "right", ...) {
+geom_scatterpie_legend <- function(radius, x, y, n=5, breaks = NULL, labeller, label_position = "right", ...) {
     ## rvar <- as.character(mapping)["r"]
     ## if (is_fixed_radius(rvar)) {
     ##     radius <- as.numeric(rvar)
@@ -28,11 +29,16 @@ geom_scatterpie_legend <- function(radius, x, y, n=5, labeller, label_position =
     #if (length(radius) > n) {
     #    radius <- unique(sapply(seq(min(radius), max(radius), length.out=n), round_digit))
     #}
-    if (n <= 1){
+    
+    if (n <= 1 && is.null(breaks)){
         stop('The n argument requires larger than 1.')
     }
 
-    radius <- scales::breaks_extended(n = n)(radius)
+    if (is.null(breaks)){
+        radius <- scales::breaks_extended(n = n)(radius)
+    }else{
+        radius <- breaks
+    }
 
     label <- FALSE
     if (!missing(labeller)) {
