@@ -1,3 +1,7 @@
+# scatterpie 0.2.1
+
++ introduce `breaks` parameter in `geom_scatterpie_legend()` (2023-06-07, Wed, #40)
+
 # scatterpie 0.2.0
 
 + increase R version of dependency to 4.1.0 as we used native pipe (2023-04-26, Wed)

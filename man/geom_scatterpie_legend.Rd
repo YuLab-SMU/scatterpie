@@ -9,6 +9,7 @@ geom_scatterpie_legend(
   x,
   y,
   n = 5,
+  breaks = NULL,
   labeller,
   label_position = "right",
   ...
@@ -22,6 +23,8 @@ geom_scatterpie_legend(
 \item{y}{y position}
 
 \item{n}{number of circle}
+
+\item{breaks}{A character vector of breaks, default is NULL.}
 
 \item{labeller}{function to label radius}
 
