@@ -26,8 +26,9 @@ Suggests:
     rmarkdown,
     prettydoc,
     maps,
-    scales
+    scales,
+    cli
 VignetteBuilder: knitr
 License: Artistic-2.0
 Encoding: UTF-8
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1
