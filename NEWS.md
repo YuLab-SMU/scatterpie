@@ -1,3 +1,7 @@
+# scatterpie 0.2.2
+
++ introduce donut_radius and bg_circle_radius parameters to control the layer of pie (2024-04-03, Wed, #46)
+
 # scatterpie 0.2.1
 
 + introduce `breaks` parameter in `geom_scatterpie_legend()` (2023-06-07, Wed, #40)
