@@ -12,6 +12,8 @@ geom_scatterpie(
   sorted_by_radius = FALSE,
   legend_name = "type",
   long_format = FALSE,
+  donut_radius = NULL,
+  bg_circle_radius = NULL,
   ...
 )
 }
@@ -28,7 +30,13 @@ geom_scatterpie(
 
 \item{legend_name}{name of fill legend}
 
-\item{long_format}{whether use long format of input data}
+\item{long_format}{logical whether use long format of input data}
+
+\item{donut_radius}{numeric the radius of donut chart (relative the radius of circle), default is NULL.
+it should be between 0 and 1, if it is provided, the donut chart will be displayed instead of pie chart.}
+
+\item{bg_circle_radius}{numeric the radius of background circle, default is FALSE, we suggest setting it 
+to between 1 and 1.5 .}
 
 \item{...}{additional parameters}
 }
@@ -47,6 +55,23 @@ d$C <- abs(rnorm(5, sd=3))
 ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
 d <- tidyr::gather(d, key="letters", value="value", -x:-y)
 ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
+p1 <- ggplot() + 
+      geom_scatterpie(
+        mapping = aes(x=x, y=y), data=d, cols="letters", 
+        long_format=TRUE, 
+        donut_radius=.5
+      ) + 
+      coord_fixed()
+p1
+p2 <- ggplot() + 
+      geom_scatterpie(
+        mapping = aes(x=x, y=y), data=d, cols="letters", 
+        long_format=TRUE, 
+        donut_radius = .5, 
+        bg_circle_radius = 1.2
+      ) + 
+      coord_fixed()
+p2
 }
 \author{
 Guangchuang Yu
