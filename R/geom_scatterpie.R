@@ -51,6 +51,17 @@
 ##'       ) + 
 ##'       coord_fixed()
 ##' p2
+##' d |> dplyr::select(c(x, y)) |> dplyr::distinct() |> dplyr::mutate(Cell=c('A','A','B','C','B')) -> d2
+##' d |> dplyr::left_join(d2) -> d3
+##' d3$r_size <- c(2, 3, 4, 5, 6) * .01
+##' 
+##' head(d3)
+##' p3 <- ggplot() +
+##'      geom_scatterpie(data = d3, mapping = aes(x=x, y=y, r = r_size, color=Cell), cols="letters",
+##'                      long_format=TRUE, donut_radius=.5, color = NA, linewidth=2,
+##'                       bg_circle_radius=1.2) + coord_fixed()
+##' p3
+##' 
 ##' @author Guangchuang Yu
 geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, 
                             sorted_by_radius = FALSE, legend_name = "type", 
@@ -70,13 +81,15 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
         mapping <- modifyList(mapping, aes_(r=size))
         if (!is.null(donut_radius)){
             donut_radius <- .check_donut_radius(donut_radius)
-            mapping <- modifyList(mapping, aes_(r0 = ~size * donut_radius))
+            data$.R0 <- size * donut_radius
+            mapping <- modifyList(mapping, aes_(r0 = ~.R0))
         }
     }else{
         if (!is.null(donut_radius)){
             rvar <- get_aes_var(mapping, 'r')
             donut_radius <- .check_donut_radius(donut_radius)
-            mapping <- modifyList(mapping, aes_(r0 = ~rvar * donut_radius))
+            data$.R0 <- data[[rvar]] * donut_radius
+            mapping <- modifyList(mapping, aes_(r0 = ~.R0))
         }
     }
 
@@ -118,10 +131,8 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
     if (!sorted_by_radius) {
         pie.layer <- geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...)
         if (!is.null(bg_circle_radius)){
-            mapping.circle <- mapping[names(mapping) %in% c('x0', 'y0')]
-            dt <- .extract_mapping_df(df, mapping, extract_aes = c('x0', 'y0'), col_var=rvar)
-            mapping.circle <- modifyList(mapping.circle, aes(r = !!as.symbol(rvar) * bg_circle_radius))
-            circle.layer <- geom_circle(data = dt, mapping = mapping.circle, inherit.aes=FALSE, ...)
+            circle.layer <- .add_circle_layer(data = df, mapping = mapping, rvar = rvar, 
+                                              bg_circle_radius = bg_circle_radius, ...)
             pie.layer <- list(circle.layer, pie.layer)
         }
         return(pie.layer)
@@ -132,10 +143,8 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
            {
         pie.layer <- geom_arc_bar(mapping, data=d, stat='pie', inherit.aes=FALSE, ...)
         if (!is.null(bg_circle_radius)){
-            mapping.circle <- mapping[names(mapping) %in% c('x0', 'y0', 'r')]
-            d2 <- .extract_mapping_df(d, mapping, extract_aes = c('x0', 'y0', 'r'), col_var = rvar)
-            mapping.circle <- modifyList(mapping.circle, aes(r = !!as.symbol(rvar) * bg_circle_radius))
-            circle.layer <- geom_circle(data = d2, mapping = mapping.circle, inherit.aes=FALSE, ...)
+            circle.layer <- .add_circle_layer(data = d, mapping = mapping, rvar = rvar, 
+                                              bg_circle_radius = bg_circle_radius, ...)
             pie.layer <- list(circle.layer, pie.layer)
         }
         return(pie.layer)
