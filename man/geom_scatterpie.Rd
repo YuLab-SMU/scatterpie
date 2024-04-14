@@ -79,7 +79,7 @@ d3$r_size <- c(2, 3, 4, 5, 6) * .01
 head(d3)
 p3 <- ggplot() +
      geom_scatterpie(data = d3, mapping = aes(x=x, y=y, r = r_size, color=Cell), cols="letters",
-                     long_format=T, donut_radius=.5, color = NA, linewidth=2,
+                     long_format=TRUE, donut_radius=.5, color = NA, linewidth=2,
                       bg_circle_radius=1.2) + coord_fixed()
 p3
 
