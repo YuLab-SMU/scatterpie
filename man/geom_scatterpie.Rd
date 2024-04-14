@@ -72,6 +72,17 @@ p2 <- ggplot() +
       ) + 
       coord_fixed()
 p2
+d |> dplyr::select(c(x, y)) |> dplyr::distinct() |> dplyr::mutate(Cell=c('A','A','B','C','B')) -> d2
+d |> dplyr::left_join(d2) -> d3
+d3$r_size <- c(2, 3, 4, 5, 6) * .01
+
+head(d3)
+p3 <- ggplot() +
+     geom_scatterpie(data = d3, mapping = aes(x=x, y=y, r = r_size, color=Cell), cols="letters",
+                     long_format=T, donut_radius=.5, color = NA, linewidth=2,
+                      bg_circle_radius=1.2) + coord_fixed()
+p3
+
 }
 \author{
 Guangchuang Yu
