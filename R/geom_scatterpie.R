@@ -78,7 +78,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
         xvar <- get_aes_var(mapping, "x")
         size <- diff(range(data[, xvar]))/ 50 * pie_scale
         data$r <- size
-        mapping <- modifyList(mapping, aes_(r=size))
+        mapping <- modifyList(mapping, aes_(r=~r))
         if (!is.null(donut_radius)){
             donut_radius <- .check_donut_radius(donut_radius)
             data$.R0 <- size * donut_radius
