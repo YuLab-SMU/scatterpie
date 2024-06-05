@@ -9,6 +9,12 @@
 ##' @param sorted_by_radius whether plotting large pie first
 ##' @param legend_name name of fill legend
 ##' @param long_format logical whether use long format of input data
+##' @param label_radius numeric the radius of label position (relative the radius of pie),
+##' default is NULL, when it is provided, the ratio or value label will be displayed.
+##' @param label_show_ratio logical only work when \code{label_radius} is not NULL,
+##' default is TRUE, meaning the ratio of label will be displayed.
+##' @param label_threshold numeric the threshold is to control display the label, the ratio of 
+##' slice pie smaller than the threshold will not be displayed. default is 0.
 ##' @param donut_radius numeric the radius of donut chart (relative the radius of circle), default is NULL.
 ##' it should be between 0 and 1, if it is provided, the donut chart will be displayed instead of pie chart.
 ##' @param bg_circle_radius numeric the radius of background circle, default is FALSE, we suggest setting it 
@@ -25,13 +31,27 @@
 ##' @importFrom dplyr bind_rows group_by group_split
 ##' @export
 ##' @return layer
+##' @author Guangchuang Yu
 ##' @examples
 ##' library(ggplot2)
 ##' d <- data.frame(x=rnorm(5), y=rnorm(5))
 ##' d$A <- abs(rnorm(5, sd=1))
 ##' d$B <- abs(rnorm(5, sd=2))
 ##' d$C <- abs(rnorm(5, sd=3))
-##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
+##' 
+##' ggplot() + 
+##' geom_scatterpie(
+##'   aes(x=x, y=y), data=d, cols=c("A", "B", "C")
+##' ) + 
+##' coord_fixed()
+##' 
+##' ggplot() + 
+##' geom_scatterpie(
+##'   aes(x=x, y=y), data = d, cols=c("A", "B", "C"), 
+##'   label_radius=1.05
+##' ) + 
+##' coord_fixed()
+##'
 ##' d <- tidyr::gather(d, key="letters", value="value", -x:-y)
 ##' ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
 ##' p1 <- ggplot() + 
@@ -61,11 +81,24 @@
 ##'                      long_format=TRUE, donut_radius=.5, color = NA, linewidth=2,
 ##'                       bg_circle_radius=1.2) + coord_fixed()
 ##' p3
-##' 
-##' @author Guangchuang Yu
-geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1, 
+##'
+##' p4 <- ggplot() +
+##'       geom_scatterpie(data = d3,
+##'                       mapping = aes(x, y = y, r = r_size),
+##'                       cols = 'letters',
+##'                       long_format = TRUE,
+##'                       label_radius = 1.1,
+##'                       label_show_ratio = FALSE,
+##'                       label_threshold = 0.06,
+##'                       fontsize = 3
+##'       ) +
+##'       coord_fixed()
+##' p4
+geom_scatterpie <- function(mapping = NULL, data, cols, pie_scale = 1, 
                             sorted_by_radius = FALSE, legend_name = "type", 
-                            long_format=FALSE, donut_radius=NULL, bg_circle_radius=NULL, ...) {
+                            long_format = FALSE, label_radius = NULL, 
+                            label_show_ratio = TRUE, label_threshold = 0,
+                            donut_radius = NULL, bg_circle_radius = NULL, ...){
     if (is.null(mapping))
         mapping <- aes_(x = ~x, y = ~y)
     mapping <- modifyList(mapping,
@@ -106,12 +139,7 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
       df$type <- factor(df$type, levels = cols) # set legend order based on order of "cols"      
       names(df)[which(names(df) == "type")] = legend_name
     }
-    ## df <- gather_(data, "type", "value", cols)
-    # cols2 <- enquo(cols)
-    # df <- gather(data, "type", "value", !!cols2)
-    # names(df)[which(names(df) == "type")] = legend_name
-
-    ## df$type <- factor(df$type, levels=cols)
+    
     if (!"group" %in% names(mapping)){
       xvar <- get_aes_var(mapping, 'x0')
       yvar <- get_aes_var(mapping, 'y0')
@@ -129,24 +157,29 @@ geom_scatterpie <- function(mapping=NULL, data, cols, pie_scale = 1,
     }
 
     if (!sorted_by_radius) {
-        pie.layer <- geom_arc_bar(mapping, data=df, stat='pie', inherit.aes=FALSE, ...)
+        pie.layer <- .build_pie_layer(df, mapping, ...)
         if (!is.null(bg_circle_radius)){
             circle.layer <- .add_circle_layer(data = df, mapping = mapping, rvar = rvar, 
                                               bg_circle_radius = bg_circle_radius, ...)
             pie.layer <- list(circle.layer, pie.layer)
         }
+        pie.layer <- .add_label_layer(pie.layer, df, mapping, label_radius, 
+                                      label_show_ratio, label_threshold,
+                                      bg_circle_radius, ...)
         return(pie.layer)
     }
 
     lapply(split(df, df[,rvar, drop=TRUE])[as.character(sort(unique(df[,rvar, drop=TRUE]), decreasing=TRUE))], 
            function(d) 
            {
-        pie.layer <- geom_arc_bar(mapping, data=d, stat='pie', inherit.aes=FALSE, ...)
+        pie.layer <- .build_pie_layer(d, mapping, ...)
         if (!is.null(bg_circle_radius)){
             circle.layer <- .add_circle_layer(data = d, mapping = mapping, rvar = rvar, 
                                               bg_circle_radius = bg_circle_radius, ...)
             pie.layer <- list(circle.layer, pie.layer)
         }
+	pie.layer <- .add_label_layer(pie.layer, d, mapping, label_radius, 
+                                      label_show_ratio, label_threshold, bg_circle_radius, ...)
         return(pie.layer)
       }
    )
