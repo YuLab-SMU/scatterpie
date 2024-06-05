@@ -13,8 +13,8 @@
 ##' default is NULL, when it is provided, the ratio or value label will be displayed.
 ##' @param label_show_ratio logical only work when \code{label_radius} is not NULL,
 ##' default is TRUE, meaning the ratio of label will be displayed.
-##' @param label_threshold numeric the threshold is to control display the label, the value or
-##' ratio of label smaller than the threshold will not be displayed. default is 0.
+##' @param label_threshold numeric the threshold is to control display the label, the ratio of 
+##' slice pie smaller than the threshold will not be displayed. default is 0.
 ##' @param donut_radius numeric the radius of donut chart (relative the radius of circle), default is NULL.
 ##' it should be between 0 and 1, if it is provided, the donut chart will be displayed instead of pie chart.
 ##' @param bg_circle_radius numeric the radius of background circle, default is FALSE, we suggest setting it 

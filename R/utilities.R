@@ -77,7 +77,7 @@ is_fixed_radius <- function(rvar) {
     x[[".RATIO"]] <- round(x[[var]]/sum(x[[var]]), 2)
     x[[var]] <- round(x[[var]], 2)
     x[['.RATIO']] <- ifelse(x[['.RATIO']] < threshold, NA, x[[".RATIO"]])
-    x[[var]] <- ifelse(x[[var]] < threshold, NA, x[[var]])
+    x[[var]] <- ifelse(x[['.RATIO']] < threshold, NA, x[[var]])
     x[['hjust']] <- ifelse(mid_angle > pi, 1, 0)
     x[['vjust']] <- ifelse(mid_angle < pi/2 | mid_angle > 3 * pi/2, 0, 1)
     x[['x']] <- rlabel * x[[r]] * sin(mid_angle) + x[['x']]
