@@ -12,6 +12,9 @@ geom_scatterpie(
   sorted_by_radius = FALSE,
   legend_name = "type",
   long_format = FALSE,
+  label_radius = NULL,
+  label_show_ratio = TRUE,
+  label_threshold = 0,
   donut_radius = NULL,
   bg_circle_radius = NULL,
   ...
@@ -31,6 +34,15 @@ geom_scatterpie(
 \item{legend_name}{name of fill legend}
 
 \item{long_format}{logical whether use long format of input data}
+
+\item{label_radius}{numeric the radius of label position (relative the radius of pie),
+default is NULL, when it is provided, the ratio or value label will be displayed.}
+
+\item{label_show_ratio}{logical only work when \code{label_radius} is not NULL,
+default is TRUE, meaning the ratio of label will be displayed.}
+
+\item{label_threshold}{numeric the threshold is to control display the label, the value or
+ratio of label smaller than the threshold will not be displayed. default is 0.}
 
 \item{donut_radius}{numeric the radius of donut chart (relative the radius of circle), default is NULL.
 it should be between 0 and 1, if it is provided, the donut chart will be displayed instead of pie chart.}
@@ -52,7 +64,20 @@ d <- data.frame(x=rnorm(5), y=rnorm(5))
 d$A <- abs(rnorm(5, sd=1))
 d$B <- abs(rnorm(5, sd=2))
 d$C <- abs(rnorm(5, sd=3))
-ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols=c("A", "B", "C")) + coord_fixed()
+
+ggplot() + 
+geom_scatterpie(
+  aes(x=x, y=y), data=d, cols=c("A", "B", "C")
+) + 
+coord_fixed()
+
+ggplot() + 
+geom_scatterpie(
+  aes(x=x, y=y), data = d, cols=c("A", "B", "C"), 
+  label_radius=1.05
+) + 
+coord_fixed()
+
 d <- tidyr::gather(d, key="letters", value="value", -x:-y)
 ggplot() + geom_scatterpie(aes(x=x, y=y), data=d, cols="letters", long_format=TRUE) + coord_fixed()
 p1 <- ggplot() + 
@@ -83,6 +108,18 @@ p3 <- ggplot() +
                       bg_circle_radius=1.2) + coord_fixed()
 p3
 
+p4 <- ggplot() +
+      geom_scatterpie(data = d3,
+                      mapping = aes(x, y = y, r = r_size),
+                      cols = 'letters',
+                      long_format = TRUE,
+                      label_radius = 1.1,
+                      label_show_ratio = FALSE,
+                      label_threshold = 0.06,
+                      fontsize = 3
+      ) +
+      coord_fixed()
+p4
 }
 \author{
 Guangchuang Yu
