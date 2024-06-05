@@ -1,3 +1,7 @@
+# scatterpie 0.2.3
+
++ supports labeling slices of pies (2024-06-05, Wed, #49)
+
 # scatterpie 0.2.2
 
 + introduce donut_radius and bg_circle_radius parameters to control the layer of pie (2024-04-03, Wed, #46)
