@@ -2,6 +2,7 @@
 ##'
 ##'
 ##' @title geom_scatterpie
+##' @rdname geom-scatterpie
 ##' @param mapping aes mapping
 ##' @param data data
 ##' @param cols cols the pie data
@@ -94,7 +95,35 @@
 ##'       ) +
 ##'       coord_fixed()
 ##' p4
-geom_scatterpie <- function(mapping = NULL, data, cols, pie_scale = 1, 
+geom_scatterpie <- function(mapping = NULL, data = NULL, cols, pie_scale = 1, 
+                            sorted_by_radius = FALSE, legend_name = "type", 
+                            long_format = FALSE, label_radius = NULL, 
+                            label_show_ratio = TRUE, label_threshold = 0,
+                            donut_radius = NULL, bg_circle_radius = NULL, ...) {
+
+    structure(list(
+        mapping = mapping,
+        data = data,
+        cols = cols,
+        pie_scale = pie_scale,
+        sorted_by_radius = sorted_by_radius,
+        legend_name = legend_name,
+        long_format = long_format,
+        label_radius = label_radius,
+        label_show_ratio = label_show_ratio,
+        label_threshold = label_threshold,
+        donut_radius = donut_radius,
+        bg_circle_radius = bg_circle_radius,
+        ...
+        ),
+        class = "layer_scatterpie"
+    )                            
+}
+
+
+##' @rdname geom-scatterpie
+##' @export
+geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1, 
                             sorted_by_radius = FALSE, legend_name = "type", 
                             long_format = FALSE, label_radius = NULL, 
                             label_show_ratio = TRUE, label_threshold = 0,
@@ -117,8 +146,8 @@ geom_scatterpie <- function(mapping = NULL, data, cols, pie_scale = 1,
             data$.R0 <- size * donut_radius
             mapping <- modifyList(mapping, aes_(r0 = ~.R0))
         }
-    }else{
-        if (!is.null(donut_radius)){
+    } else {
+        if (!is.null(donut_radius)) {
             rvar <- get_aes_var(mapping, 'r')
             donut_radius <- .check_donut_radius(donut_radius)
             data$.R0 <- data[[rvar]] * donut_radius
@@ -185,4 +214,13 @@ geom_scatterpie <- function(mapping = NULL, data, cols, pie_scale = 1,
    )
 }
 
+
+##' @importFrom ggplot2 ggplot_add
+##' @method ggplot_add layer_scatterpie
+##' @export
+ggplot_add.layer_scatterpie <- function(object, plot, object_name) {
+    if (is.null(object$data)) object$data <- plot$data
+    layer <- do.call(geom_scatterpie2, object)
+    ggplot_add(layer, plot, object_name)
+}
 

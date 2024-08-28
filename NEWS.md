@@ -1,3 +1,7 @@
+# scatterpie 0.2.4
+
++ if `geom_scatterpie(data = NULL)`, the layer will try to use `plot$data` (2024-08-28, Wed)
+
 # scatterpie 0.2.3
 
 + supports labeling slices of pies (2024-06-05, Wed, #49)

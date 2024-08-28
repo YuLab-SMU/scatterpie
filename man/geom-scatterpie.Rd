@@ -2,9 +2,26 @@
 % Please edit documentation in R/geom_scatterpie.R
 \name{geom_scatterpie}
 \alias{geom_scatterpie}
+\alias{geom_scatterpie2}
 \title{geom_scatterpie}
 \usage{
 geom_scatterpie(
+  mapping = NULL,
+  data = NULL,
+  cols,
+  pie_scale = 1,
+  sorted_by_radius = FALSE,
+  legend_name = "type",
+  long_format = FALSE,
+  label_radius = NULL,
+  label_show_ratio = TRUE,
+  label_threshold = 0,
+  donut_radius = NULL,
+  bg_circle_radius = NULL,
+  ...
+)
+
+geom_scatterpie2(
   mapping = NULL,
   data,
   cols,
