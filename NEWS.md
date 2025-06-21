@@ -1,3 +1,7 @@
+# scatterpie 0.2.5
+
++ S3 method consistency with ggplot2 (v=4.0.0) (2025-06-21, Sat, #50)
+
 # scatterpie 0.2.4
 
 + if `geom_scatterpie(data = NULL)`, the layer will try to use `plot$data` (2024-08-28, Wed)
