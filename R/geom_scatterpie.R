@@ -218,9 +218,9 @@ geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1,
 ##' @importFrom ggplot2 ggplot_add
 ##' @method ggplot_add layer_scatterpie
 ##' @export
-ggplot_add.layer_scatterpie <- function(object, plot, object_name) {
+ggplot_add.layer_scatterpie <- function(object, plot, object_name, ...) {
     if (is.null(object$data)) object$data <- plot$data
     layer <- do.call(geom_scatterpie2, object)
-    ggplot_add(layer, plot, object_name)
+    ggplot_add(layer, plot, object_name, ...)
 }
 
