@@ -121,6 +121,7 @@ geom_scatterpie <- function(mapping = NULL, data = NULL, cols, pie_scale = 1,
 }
 
 
+##' @importFrom rlang sym
 ##' @rdname geom-scatterpie
 ##' @export
 geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1, 
@@ -129,29 +130,29 @@ geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1,
                             label_show_ratio = TRUE, label_threshold = 0,
                             donut_radius = NULL, bg_circle_radius = NULL, ...){
     if (is.null(mapping))
-        mapping <- aes_(x = ~x, y = ~y)
+        mapping <- aes(x = !!sym("x"), y = !!sym("y"))
     mapping <- modifyList(mapping,
-                          aes_(r0 = 0,
-                               fill = as.formula(paste0("~", legend_name)),
-                               amount=~value)
+                          aes(r0 = 0,
+                               fill = !!sym(legend_name),
+                               amount=!!sym("value"))
                           )
 
     if (!'r' %in% names(mapping)) {
         xvar <- get_aes_var(mapping, "x")
         size <- diff(range(data[, xvar], na.rm=TRUE))/ 50 * pie_scale
         data$r <- size
-        mapping <- modifyList(mapping, aes_(r=~r))
+        mapping <- modifyList(mapping, aes(r=!!sym("r")))
         if (!is.null(donut_radius)){
             donut_radius <- .check_donut_radius(donut_radius)
             data$.R0 <- size * donut_radius
-            mapping <- modifyList(mapping, aes_(r0 = ~.R0))
+            mapping <- modifyList(mapping, aes(r0 = !!sym(".R0")))
         }
     } else {
         if (!is.null(donut_radius)) {
             rvar <- get_aes_var(mapping, 'r')
             donut_radius <- .check_donut_radius(donut_radius)
             data$.R0 <- data[[rvar]] * donut_radius
-            mapping <- modifyList(mapping, aes_(r0 = ~.R0))
+            mapping <- modifyList(mapping, aes(r0 = !!sym(".R0")))
         }
     }
 
@@ -176,7 +177,7 @@ geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1,
        dplyr::group_split() |> as.list()
       names(df) <- seq_len(length(df))
       df <- dplyr::bind_rows(df, .id=".group.id")
-      mapping <- modifyList(mapping, aes_(group = ~.group.id))
+      mapping <- modifyList(mapping, aes(group = !!sym(".group.id")))
     }
 
     if ('r' %in% colnames(df)){

@@ -14,6 +14,7 @@
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggplot2 geom_segment
 ##' @importFrom ggplot2 geom_text
+##' @importFrom rlang .data
 ##' @export
 ##' @return layer
 ##' @author Guangchuang Yu
@@ -66,8 +67,8 @@ geom_scatterpie_legend <- function(radius, x, y, n=5, breaks = NULL, labeller, l
     }
 
     list(
-        geom_arc_bar(aes_(x0=~x, y0=~y, r0=~r, r=~r, start=~start, end=~end), data=dd, inherit.aes=FALSE),
-        geom_segment(aes_(x=~x, xend=~sign(x, maxr*1.5), y=~y+r, yend=~y+r), data=dd, inherit.aes=FALSE),
-        geom_text(aes_(x=~sign(x, maxr*1.6), y=~y+r, label=~label), data=dd, hjust=hjust, inherit.aes=FALSE, ... = ...)
+        geom_arc_bar(aes(x0=!!sym("x"), y0=!!sym("y"), r0=!!sym("r"), r=!!sym("r"), start=!!sym("start"), end=!!sym("end")), data=dd, inherit.aes=FALSE),
+        geom_segment(aes(x=.data[["x"]], xend=sign(.data[["x"]], .data[["maxr"]]*1.5), y=.data[["y"]]+.data[["r"]], yend=.data[["y"]]+.data[["r"]]), data=dd, inherit.aes=FALSE),
+        geom_text(aes(x=sign(.data[["x"]], .data[["maxr"]]*1.6), y=.data[["y"]]+.data[["r"]], label=.data[["label"]]), data=dd, hjust=hjust, inherit.aes=FALSE, ... = ...)
     )
 }
