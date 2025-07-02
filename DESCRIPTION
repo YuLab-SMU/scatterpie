@@ -1,6 +1,6 @@
 Package: scatterpie
 Title: Scatter Pie Plot
-Version: 0.2.5
+Version: 0.2.5.001
 Authors@R: c(
     person(given = "Guangchuang", family = "Yu", 
             email = "guangchuangyu@gmail.com", role  = c("aut", "cre"), 

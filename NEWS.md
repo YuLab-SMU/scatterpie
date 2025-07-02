@@ -1,3 +1,7 @@
+# scatterpie 0.2.5.001
+
++ replace `aes_` and `aes_string` with `aes` as they are soft-deprecated (2025-07-02, Wed)
+
 # scatterpie 0.2.5
 
 + S3 method consistency with ggplot2 (v=4.0.0) (2025-06-21, Sat, #50)
