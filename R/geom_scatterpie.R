@@ -162,7 +162,7 @@ geom_scatterpie2 <- function(mapping = NULL, data, cols, pie_scale = 1,
       names(df)[which(names(df) == cols)] = legend_name
       cols2 <- enquo(cols)
     } else{
-      data <- data[rowSums(data[, cols]) > 0, ]
+      data <- data[rowSums(data[, cols, drop = FALSE]) > 0, ]
       ## df <- gather_(data, "type", "value", cols)
       cols2 <- enquo(cols)
       df <- gather(data, "type", "value", !!cols2)
