@@ -1,6 +1,7 @@
-# scatterpie 0.2.5.001
+# scatterpie 0.2.6
 
-+ replace `aes_` and `aes_string` with `aes` as they are soft-deprecated (2025-07-02, Wed)
++ Added drop = FALSE to subsetting of data (2025-09-12, Fri, #52)
++ replace `aes_` and `aes_string` with `aes` as they are soft-deprecated (2025-07-02, Wed, #51)
 
 # scatterpie 0.2.5
 
